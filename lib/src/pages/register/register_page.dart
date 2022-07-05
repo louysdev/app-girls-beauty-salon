@@ -268,7 +268,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Icons.arrow_back_ios,
             color: Colors.white
         ),
-        onPressed: () {}
+        onPressed: _con.back,
     );
   }
 
