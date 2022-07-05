@@ -57,6 +57,16 @@ class RegisterController{
 
     MySnackbar.show(context, responseApi.message);
 
+    /*
+     Hacer que la luego de registrarse se espere 3 segundo para luego volver,
+     a la pantalla de login
+     */
+    if (responseApi.success) {
+      Future.delayed(Duration(seconds: 3), () {
+        Navigator.pushReplacementNamed(context, 'login');
+      });
+    }
+
     print('RESPUESTA: ${responseApi.toJson()}');
 
   }
