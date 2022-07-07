@@ -10,7 +10,6 @@ La aplicacion fue desarollada en el lenguaje Dart utilizando el framework Flutte
 
 Para poder correr esta aplicacion necesita tener instalado lo siguiente :
 
-- Android Studio o VS Code
 - Flutter: Version 2.0.6
 - Dart: Version 2.12.3
 
