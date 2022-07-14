@@ -22,7 +22,11 @@ class LoginController {
     User user = User.fromJson(await _sharedPref.read('user') ?? {});
 
     if(user?.sessionToken != null){
-      Navigator.pushNamedAndRemoveUntil(context, 'client/products/list', (route) => false);
+      if(user.roles.length > 1) {
+        Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
+      }else {
+        Navigator.pushNamedAndRemoveUntil(context, user.roles[0].route, (route) => false);
+      }
     }
 
   }

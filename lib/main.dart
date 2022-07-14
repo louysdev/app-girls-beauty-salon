@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
         'roles' : (BuildContext context) => RolesPage(),
         'client/products/list' : (BuildContext context) => ClientProductsListPage(),
         'restaurant/orders/list' : (BuildContext context) => RestaurantOrdersListPage(),
-        'delivery/orders/list' : (BuildContext context) => DeliveryOrdersListPage()
+        'delive♣ry/orders/list' : (BuildContext context) => DeliveryOrdersListPage()
       },
       theme: ThemeData(
         primaryColor: MyColors.primaryColor
