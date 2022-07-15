@@ -151,7 +151,8 @@ class _LoginPageState extends State<LoginPage> {
         Text(
           '¿No tienes cuenta?',
           style: TextStyle(
-              color: MyColors.primaryColor
+              color: MyColors.primaryColor,
+              fontSize: 17
           ),
         ),
         SizedBox(width: 7),
@@ -161,7 +162,8 @@ class _LoginPageState extends State<LoginPage> {
             'Registrate',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: MyColors.primaryColor
+                color: MyColors.primaryColor,
+                fontSize: 17
             ),
           ),
         )
