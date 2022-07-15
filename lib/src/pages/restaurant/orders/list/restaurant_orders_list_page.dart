@@ -20,7 +20,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      _con.init(context);
+      _con.init(context, refresh);
     });
   }
 
@@ -62,7 +62,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Nombre de usuario',
+                    '${_con.user?.name ?? ''} ${_con.user?.lastname ?? ''}',
                     style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -71,7 +71,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                     maxLines: 1,
                   ),
                   Text(
-                    'Email',
+                    _con.user?.email ?? '',
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[200],
@@ -81,7 +81,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                     maxLines: 1,
                   ),
                   Text(
-                    'Telefono',
+                    _con.user?.phone ?? '',
                     style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey[200],
@@ -94,7 +94,9 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                     height: 60,
                     margin: EdgeInsets.only(top: 10),
                     child: FadeInImage(
-                      image: AssetImage('assets/img/no-image.png'),
+                      image: _con.user?.image != null
+                          ? NetworkImage(_con.user?.image)
+                          : AssetImage('assets/img/no-image.png'),
                       fit: BoxFit.contain,
                       fadeInDuration: Duration(milliseconds: 50),
                       placeholder: AssetImage('assets/img/no-image.png'),
@@ -103,10 +105,13 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                 ],
               )
           ),
+          _con.user != null ?
+          _con.user.roles.length > 1 ?
           ListTile(
+            onTap: _con.goToRoles,
             title: Text('Seleccionar rol'),
             trailing: Icon(Icons.person_outlined),
-          ),
+          ) : Container() : Container(),
           ListTile(
             onTap: _con.logout,
             title: Text('Cerrar sesion'),
@@ -116,5 +121,9 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
         ],
       ),
     );
+  }
+
+  void refresh() {
+    setState(() {});
   }
 }
