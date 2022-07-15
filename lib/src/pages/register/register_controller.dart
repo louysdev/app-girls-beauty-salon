@@ -6,6 +6,7 @@ import 'package:app_delivery_udemy/src/provider/users_provider.dart';
 import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 
 class RegisterController {
 
@@ -23,10 +24,15 @@ class RegisterController {
   File imageFile;
   Function refresh;
 
+  ProgressDialog _progressDialog;
+
+  bool isEnable = true;
+
   Future init(BuildContext context, Function refresh) {
     this.context = context;
     this.refresh = refresh;
     usersProvider.init(context);
+    _progressDialog = ProgressDialog(context: context);
   }
 
   void register() async {
@@ -60,6 +66,9 @@ class RegisterController {
       return;
     }
 
+    _progressDialog.show(max: 100, msg: 'Espere un momento...');
+    isEnable = false;
+
     User user = new User(
         email: email,
         name: name,
@@ -70,6 +79,9 @@ class RegisterController {
 
     Stream stream = await usersProvider.createWithImage(user, imageFile);
     stream.listen((res) {
+
+      _progressDialog.close();
+
       //ResponseApi responseApi = await usersProvider.create(user);
       ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
       print('RESPUESTA: ${responseApi.toJson()}');
@@ -84,6 +96,9 @@ class RegisterController {
         Future.delayed(Duration(seconds: 3), () {
           Navigator.pushReplacementNamed(context, 'login');
         });
+      }
+      else {
+        isEnable = true;
       }
     });
   }
