@@ -1,6 +1,9 @@
 import 'package:app_delivery_udemy/src/pages/client/products/list/client_products_list_page.dart';
+import 'package:app_delivery_udemy/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
 import 'package:app_delivery_udemy/src/pages/login/login_page.dart';
 import 'package:app_delivery_udemy/src/pages/register/register_page.dart';
+import 'package:app_delivery_udemy/src/pages/restaurant/orders/list/restaurant_orders_list_page.dart';
+import 'package:app_delivery_udemy/src/pages/roles/roles_page.dart';
 import 'package:app_delivery_udemy/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +28,10 @@ class _MyAppState extends State<MyApp> {
       routes: {
         'login' : (BuildContext context) => LoginPage(),
         'register' : (BuildContext context) => RegisterPage(),
-        'client/products/list' : (BuildContext context) => ClientProductsListPage()
+        'roles' : (BuildContext context) => RolesPage(),
+        'client/products/list' : (BuildContext context) => ClientProductsListPage(),
+        'restaurant/orders/list' : (BuildContext context) => RestaurantOrdersListPage(),
+        'delive♣ry/orders/list' : (BuildContext context) => DeliveryOrdersListPage()
       },
       theme: ThemeData(
         primaryColor: MyColors.primaryColor
