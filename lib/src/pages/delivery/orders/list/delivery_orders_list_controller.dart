@@ -2,7 +2,7 @@ import 'package:app_delivery_udemy/src/models/user.dart';
 import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 
-class ClientProductListController {
+class DelivertOrdersListController {
 
   BuildContext context;
   SharedPref _sharedPref = new SharedPref();
@@ -25,7 +25,7 @@ class ClientProductListController {
   void openDrawer() {
     key.currentState.openDrawer();
   }
-  
+
   void goToRoles() {
     Navigator.pushNamedAndRemoveUntil(context, 'roles', (route) => false);
   }
