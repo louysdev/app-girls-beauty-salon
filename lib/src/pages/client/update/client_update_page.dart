@@ -38,7 +38,7 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
                 SizedBox(height: 50),
                 _imageUser(),
                 SizedBox(height: 30),
-                _textFieldEmail(),
+                _textFieldName(),
                 _textFieldLastName(),
                 _textFieldPhone(),
               ],
@@ -46,42 +46,6 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
           ),
         ),
       bottomNavigationBar: _buttonRegister(),
-    );
-  }
-
-  Widget _circle(){
-    return Container(
-      width: 240,
-      height: 230,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
-          color: MyColors.primaryColor
-      ),
-    );
-  }
-
-  Widget _textFieldEmail(){
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
-      decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)
-      ),
-      child: TextField(
-        controller: _con.emailController,
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-            hintText: 'Correo electronico',
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.all(15),
-            hintStyle: TextStyle(
-                color: MyColors.primaryColorDark
-            ),
-            prefixIcon: Icon(
-                Icons.email,
-                color: MyColors.primaryColor)
-        ),
-      ),
     );
   }
 
@@ -158,55 +122,6 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
     );
   }
 
-  Widget _textFieldPassword(){
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
-      decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)
-      ),
-      child: TextField(
-        controller: _con.passwordController,
-        obscureText: true,
-        decoration: InputDecoration(
-            hintText: 'Contraseña',
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.all(15),
-            hintStyle: TextStyle(
-                color: MyColors.primaryColorDark
-            ),
-            prefixIcon: Icon(
-                Icons.lock,
-                color: MyColors.primaryColor)
-        ),
-      ),
-    );
-  }
-
-  Widget _textFieldConfirmPassword(){
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 5),
-      decoration: BoxDecoration(
-          color: MyColors.primaryOpacityColor,
-          borderRadius: BorderRadius.circular(30)
-      ),
-      child: TextField(
-        controller: _con.confirmPasswordController,
-        obscureText: true,
-        decoration: InputDecoration(
-            hintText: 'Confirmar Contraseña',
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.all(15),
-            hintStyle: TextStyle(
-                color: MyColors.primaryColorDark
-            ),
-            prefixIcon: Icon(
-                Icons.lock_outline,
-                color: MyColors.primaryColor)
-        ),
-      ),
-    );
-  }
 
   Widget _buttonRegister(){
     return Container(
@@ -226,35 +141,15 @@ class _ClientUpdatePageState extends State<ClientUpdatePage> {
     );
   }
 
-  Widget _textRegister(){
-    return Text(
-      'REGISTRO',
-      style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-          fontFamily: 'NimbusSans'
-      ),
-    );
-  }
-
-  Widget _iconBack(){
-    return IconButton(
-      icon: Icon(
-          Icons.arrow_back_ios,
-          color: Colors.white
-      ),
-      onPressed: _con.back,
-    );
-  }
-
   Widget _imageUser(){
     return GestureDetector(
       onTap: _con.showAlertDialog,
       child: CircleAvatar(
         backgroundImage: _con.imageFile != null
             ? FileImage(_con.imageFile)
-            : AssetImage('assets/img/user_profile_2.png'),
+            : _con.user?.image != null
+              ? NetworkImage(_con.user?.image)
+              : AssetImage('assets/img/user_profile_2.png'),
         radius: 60,
         backgroundColor: Colors.grey[200],
       ),

@@ -4,6 +4,7 @@ import 'package:app_delivery_udemy/src/models/response_api.dart';
 import 'package:app_delivery_udemy/src/models/user.dart';
 import 'package:app_delivery_udemy/src/provider/users_provider.dart';
 import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
+import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/progress_dialog.dart';
@@ -11,53 +12,43 @@ import 'package:sn_progress_dialog/progress_dialog.dart';
 class ClientUpdateController {
 
   BuildContext context;
-  TextEditingController emailController = new TextEditingController();
   TextEditingController nameController = new TextEditingController();
   TextEditingController lastNameController = new TextEditingController();
   TextEditingController phoneController = new TextEditingController();
-  TextEditingController passwordController = new TextEditingController();
-  TextEditingController confirmPasswordController = new TextEditingController();
 
   UsersProvider usersProvider = new UsersProvider();
 
   PickedFile pickedFile;
   File imageFile;
   Function refresh;
-  bool isEnable = true;
 
   ProgressDialog _progressDialog;
 
-  Future init(BuildContext context, Function refresh) {
+  bool isEnable = true;
+  User user;
+  SharedPref _sharedPref = new SharedPref();
 
+  Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
     usersProvider.init(context);
     _progressDialog = ProgressDialog(context: context);
+    user = User.fromJson(await _sharedPref.read('user'));
+
+    nameController.text = user.name;
+    lastNameController.text = user.lastname;
+    phoneController.text = user.phone;
+    refresh();
   }
 
   void register() async {
-    String email = emailController.text.trim();
     String name = nameController.text;
     String lastname = lastNameController.text;
     String phone = phoneController.text.trim();
-    String password = passwordController.text.trim();
-    String confirmPassword = confirmPasswordController.text.trim();
 
 
-    if (email.isEmpty || name.isEmpty || lastname.isEmpty || phone.isEmpty ||
-        confirmPassword.isEmpty) {
+    if (name.isEmpty || lastname.isEmpty || phone.isEmpty) {
       MySnackbar.show(context, 'Debes ingresar todos los campos');
-      return;
-    }
-
-    if (confirmPassword != password) {
-      MySnackbar.show(context, 'Las contraseñas no coincides');
-      return;
-    }
-
-    if (password.length < 6) {
-      MySnackbar.show(
-          context, 'La contraseña debe tener por lo menos 6 caracteres');
       return;
     }
 
@@ -70,11 +61,9 @@ class ClientUpdateController {
     isEnable = false;
 
     User user = new User(
-        email: email,
         name: name,
         lastname: lastname,
         phone: phone,
-        password: password
     );
 
     Stream stream = await usersProvider.createWithImage(user, imageFile);
