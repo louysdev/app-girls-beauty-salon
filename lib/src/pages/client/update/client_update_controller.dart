@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/progress_dialog.dart';
 
-class RegisterController {
+class ClientUpdateController {
 
   BuildContext context;
   TextEditingController emailController = new TextEditingController();
@@ -103,47 +103,47 @@ class RegisterController {
     });
   }
 
-    Future selectImage(ImageSource imageSource) async {
-      pickedFile = await ImagePicker().getImage(source: imageSource);
-      if (pickedFile != null) {
-        imageFile = File(pickedFile.path);
-      }
-      Navigator.pop(context);
-      refresh();
+  Future selectImage(ImageSource imageSource) async {
+    pickedFile = await ImagePicker().getImage(source: imageSource);
+    if (pickedFile != null) {
+      imageFile = File(pickedFile.path);
     }
-
-    void showAlertDialog() {
-      Widget galleryButton = ElevatedButton(
-        onPressed: () {
-          selectImage(ImageSource.gallery);
-        },
-        child: Text('GALERIA'),
-      );
-
-      Widget cameraButton = ElevatedButton(
-        onPressed: () {
-          selectImage(ImageSource.camera);
-        },
-        child: Text('CAMARA'),
-      );
-
-      AlertDialog alertDialog = AlertDialog(
-        title: Text('Selecciona tu imagen'),
-        actions: [
-          galleryButton,
-          cameraButton
-        ],
-      );
-
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return alertDialog;
-          }
-      );
-    }
-
-    void back() {
-      Navigator.pop(context);
-    }
+    Navigator.pop(context);
+    refresh();
   }
+
+  void showAlertDialog() {
+    Widget galleryButton = ElevatedButton(
+      onPressed: () {
+        selectImage(ImageSource.gallery);
+      },
+      child: Text('GALERIA'),
+    );
+
+    Widget cameraButton = ElevatedButton(
+      onPressed: () {
+        selectImage(ImageSource.camera);
+      },
+      child: Text('CAMARA'),
+    );
+
+    AlertDialog alertDialog = AlertDialog(
+      title: Text('Selecciona tu imagen'),
+      actions: [
+        galleryButton,
+        cameraButton
+      ],
+    );
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alertDialog;
+        }
+    );
+  }
+
+  void back() {
+    Navigator.pop(context);
+  }
+}
