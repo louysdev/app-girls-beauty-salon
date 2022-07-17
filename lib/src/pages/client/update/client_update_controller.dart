@@ -6,6 +6,7 @@ import 'package:app_delivery_udemy/src/provider/users_provider.dart';
 import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
 import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/progress_dialog.dart';
 
@@ -41,7 +42,7 @@ class ClientUpdateController {
     refresh();
   }
 
-  void register() async {
+  void update() async {
     String name = nameController.text;
     String lastname = lastNameController.text;
     String phone = phoneController.text.trim();
@@ -60,31 +61,24 @@ class ClientUpdateController {
     _progressDialog.show(max: 100, msg: 'Espere un momento...');
     isEnable = false;
 
-    User user = new User(
+    User myUser = new User(
+        id: user.id,
         name: name,
         lastname: lastname,
         phone: phone,
     );
 
-    Stream stream = await usersProvider.createWithImage(user, imageFile);
+    Stream stream = await usersProvider.update(myUser, imageFile);
     stream.listen((res) {
 
       _progressDialog.close();
 
       //ResponseApi responseApi = await usersProvider.create(user);
       ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
-      print('RESPUESTA: ${responseApi.toJson()}');
+      Fluttertoast.showToast(msg: responseApi.message);
 
-      MySnackbar.show(context, responseApi.message);
-
-      /*
-     Hacer que la luego de registrarse se espere 3 segundo para luego volver,
-     a la pantalla de login
-     */
       if (responseApi.success) {
-        Future.delayed(Duration(seconds: 3), () {
-          Navigator.pushReplacementNamed(context, 'login');
-        });
+        Navigator.pushNamedAndRemoveUntil(context, 'client/products/list', (route) => false);
       }
       else {
         isEnable = true;
