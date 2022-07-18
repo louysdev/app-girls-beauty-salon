@@ -24,7 +24,6 @@ class UsersProvider {
 
   Future<User> getById(String id) async {
     try {
-
       Uri url = Uri.http(_url, '$_api/findById/$id');
       Map<String, String> headers = {
         'Content-type': 'application/json',

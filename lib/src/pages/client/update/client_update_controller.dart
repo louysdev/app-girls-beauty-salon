@@ -11,7 +11,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/progress_dialog.dart';
 
 class ClientUpdateController {
-
   BuildContext context;
   TextEditingController nameController = new TextEditingController();
   TextEditingController lastNameController = new TextEditingController();
@@ -50,7 +49,6 @@ class ClientUpdateController {
     String lastname = lastNameController.text;
     String phone = phoneController.text.trim();
 
-
     if (name.isEmpty || lastname.isEmpty || phone.isEmpty) {
       MySnackbar.show(context, 'Debes ingresar todos los campos');
       return;
@@ -69,21 +67,21 @@ class ClientUpdateController {
 
     Stream stream = await usersProvider.update(myUser, imageFile);
     stream.listen((res) async {
-
       _progressDialog.close();
 
       //ResponseApi responseApi = await usersProvider.create(user);
       ResponseApi responseApi = ResponseApi.fromJson(json.decode(res));
+
+      print(responseApi.message);
       Fluttertoast.showToast(msg: responseApi.message);
 
       if (responseApi.success) {
-        user = await usersProvider.getById(myUser.id); //Obeteniendo el usuario de la base de datos
-        print(user.toJson());
+        user = await usersProvider
+            .getById(myUser.id); //Obeteniendo el usuario de la base de datos
         _sharedPref.save('user', user.toJson());
-
-        Navigator.pushNamedAndRemoveUntil(context, 'client/products/list', (route) => false);
-      }
-      else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, 'client/products/list', (route) => false);
+      } else {
         isEnable = true;
       }
     });
@@ -115,18 +113,14 @@ class ClientUpdateController {
 
     AlertDialog alertDialog = AlertDialog(
       title: Text('Selecciona tu imagen'),
-      actions: [
-        galleryButton,
-        cameraButton
-      ],
+      actions: [galleryButton, cameraButton],
     );
 
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return alertDialog;
-        }
-    );
+        });
   }
 
   void back() {
