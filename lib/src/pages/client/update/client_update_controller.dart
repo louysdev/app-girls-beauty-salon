@@ -35,7 +35,9 @@ class ClientUpdateController {
 
     _progressDialog = ProgressDialog(context: context);
     user = User.fromJson(await _sharedPref.read('user'));
-    usersProvider.init(context, token: user.sessionToken);
+
+    print('TOKEN ENVIADO: ${user.sessionToken}');
+    usersProvider.init(context, sessionUser: user);
 
     nameController.text = user.name;
     lastNameController.text = user.lastname;

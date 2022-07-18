@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:app_delivery_udemy/src/provider/users_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,7 +26,10 @@ class SharedPref {
     return prefs.remove(key);
   }
 
-  void logout(BuildContext context) async {
+  void logout(BuildContext context, String idUser) async {
+    UsersProvider usersProvider = new UsersProvider();
+    usersProvider.init(context);
+    await usersProvider.logout(idUser);
     await remove('user');
     Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
   }
