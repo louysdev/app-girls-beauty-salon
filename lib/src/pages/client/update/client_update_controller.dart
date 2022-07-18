@@ -53,11 +53,6 @@ class ClientUpdateController {
       return;
     }
 
-    if (imageFile == null) {
-      MySnackbar.show(context, 'Selecciona una imagen');
-      return;
-    }
-
     _progressDialog.show(max: 100, msg: 'Espere un momento...');
     isEnable = false;
 
@@ -66,6 +61,7 @@ class ClientUpdateController {
         name: name,
         lastname: lastname,
         phone: phone,
+        image: user.image
     );
 
     Stream stream = await usersProvider.update(myUser, imageFile);
@@ -79,6 +75,7 @@ class ClientUpdateController {
 
       if (responseApi.success) {
         user = await usersProvider.getById(myUser.id); //Obeteniendo el usuario de la base de datos
+        print(user.toJson());
         _sharedPref.save('user', user.toJson());
 
         Navigator.pushNamedAndRemoveUntil(context, 'client/products/list', (route) => false);
