@@ -32,9 +32,10 @@ class ClientUpdateController {
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
-    usersProvider.init(context);
+
     _progressDialog = ProgressDialog(context: context);
     user = User.fromJson(await _sharedPref.read('user'));
+    usersProvider.init(context, token: user.sessionToken);
 
     nameController.text = user.name;
     lastNameController.text = user.lastname;
