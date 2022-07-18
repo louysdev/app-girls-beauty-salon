@@ -1,4 +1,9 @@
+import 'package:app_delivery_udemy/src/models/category.dart';
+import 'package:app_delivery_udemy/src/models/response_api.dart';
+import 'package:app_delivery_udemy/src/models/user.dart';
+import 'package:app_delivery_udemy/src/provider/categories_provider.dart';
 import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
+import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantCategoriesCreateController {
@@ -9,12 +14,18 @@ class RestaurantCategoriesCreateController {
   TextEditingController nameController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
 
-  Future init(BuildContext context, Function refresh) {
+  CategoriesProvider _categoriesProvider = new CategoriesProvider();
+  User user;
+  SharedPref sharedPref = new SharedPref();
+
+  Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
+    user = User.fromJson(await sharedPref.read('user'));
+    _categoriesProvider.init(context, user);
   }
 
-  void createCategory() {
+  void createCategory() async {
     String name = nameController.text;
     String description = descriptionController.text;
 
@@ -23,8 +34,21 @@ class RestaurantCategoriesCreateController {
       return;
     }
 
-    print('Nombre: $name');
-    print('Descripcion: $description');
+    Category category = new Category(
+      name: name,
+      description: description
+    );
+
+    ResponseApi responseApi = await _categoriesProvider.create(category);
+
+    MySnackbar.show(context, responseApi.message);
+
+    print('Respuesta: ${responseApi.success}');
+    if(responseApi.success) {
+      nameController.text = '';
+      descriptionController.text = '';
+    }
+
   }
 
 }
