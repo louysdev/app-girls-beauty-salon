@@ -1,6 +1,7 @@
 import 'package:app_delivery_udemy/src/models/category.dart';
 import 'package:app_delivery_udemy/src/pages/client/products/list/client_products_list_controller.dart';
 import 'package:app_delivery_udemy/src/utils/my_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -62,7 +63,13 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
         drawer: _drawer(),
         body: TabBarView(
           children: _con.categories.map((Category category) {
-            return _cardProduct();
+            return GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: 0.7,
+                children: List.generate(10, (index) {
+                  return _cardProduct();
+                }),
+            );
           }).toList(),
         )
       ),
@@ -251,6 +258,7 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
               children: [
                 Container(
                   height: 150,
+                  margin: EdgeInsets.only(top: 20),
                   width: MediaQuery.of(context).size.width * 0.45,
                   padding: EdgeInsets.all(20),
                   child: FadeInImage(
@@ -262,16 +270,20 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20),
+                  height: 33,
                   child: Text(
                     'Nombre del producto',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'NimbusSans'
                     ),
                   ),
                 ),
+                Spacer(),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Text(
                     '0.0\$',
                     style: TextStyle(
