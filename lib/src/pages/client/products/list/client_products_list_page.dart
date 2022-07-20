@@ -27,8 +27,23 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _con.key,
-      appBar: AppBar(
-        leading: _menuDrawer(),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(170),
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          actions: [
+            _shoppingBag(),
+          ],
+          flexibleSpace: Column(
+            children: [
+              SizedBox(height: 40),
+              _menuDrawer(),
+              SizedBox(height: 20),
+              _textFieldSearch()
+            ],
+          ),
+        ),
       ),
       drawer: _drawer(),
       body: Center(
@@ -130,6 +145,63 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
             trailing: Icon(Icons.power_settings_new),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _shoppingBag() {
+    return Stack(
+      children: [
+        Container(
+          margin: EdgeInsets.only(right: 15, top: 13),
+          child: Icon(
+            Icons.shopping_bag_outlined,
+            color: Colors.black,
+          ),
+        ),
+        Positioned(
+          right: 16,
+            top: 15,
+            child: Container(
+              width: 9,
+              height: 9,
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.all(Radius.circular(30))
+              ),
+        ))
+      ],
+    );
+  }
+
+  Widget _textFieldSearch() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'Buscar',
+          suffixIcon: Icon(
+            Icons.search,
+            color: Colors.grey[400],
+          ),
+          hintStyle: TextStyle(
+            fontSize: 17,
+            color: Colors.grey[500]
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(
+              color: Colors.grey[300]
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(
+                color: Colors.grey[300]
+            ),
+          ),
+          contentPadding: EdgeInsets.all(15)
+        ),
       ),
     );
   }
