@@ -51,7 +51,7 @@ class _RestaurantProductsCreatePageState extends State<RestaurantProductsCreateP
               ],
             ),
           ),
-          _dropDownCategories([])
+          _dropDownCategories(_con.categories)
         ],
       ),
       bottomNavigationBar: _buttonCreate(),
@@ -185,7 +185,14 @@ class _RestaurantProductsCreatePageState extends State<RestaurantProductsCreateP
                       fontSize: 16
                     ),
                   ),
-                  items: [],
+                  items: _dropDownItems(categories),
+                  value: _con.idCategory,
+                  onChanged: (option) {
+                    setState(() {
+                      print('Categoria seleccionada: $option');
+                      _con.idCategory = option; // ESTABLECIENDO A LA VARIABLE AL ID CATEGORY
+                    });
+                  },
                 )
               )
             ],
@@ -193,6 +200,19 @@ class _RestaurantProductsCreatePageState extends State<RestaurantProductsCreateP
         ),
       ),
     );
+  }
+
+  List<DropdownMenuItem<String>> _dropDownItems(List<Category> categories) {
+    
+    List<DropdownMenuItem<String>> list = [];
+    categories.forEach((category) {
+      list.add(DropdownMenuItem(
+        child: Text(category.name),
+         value: category.id, 
+      ));
+    });
+
+    return list;
   }
 
   Widget _buttonCreate(){

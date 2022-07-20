@@ -20,11 +20,15 @@ class RestaurantProductsCreateController {
   User user;
   SharedPref sharedPref = new SharedPref();
 
+  List<Category> categories = [];
+  String idCategory; //ALMCENAR ID DE LA CATEGORIA SELECCIONADA
+
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
     user = User.fromJson(await sharedPref.read('user'));
     _categoriesProvider.init(context, user);
+    getCategories();
   }
 
   void createProduct() async {
@@ -35,7 +39,11 @@ class RestaurantProductsCreateController {
       MySnackbar.show(context, 'Debe ingresar todos los campos');
       return;
     }
+  }
 
+  void getCategories() async {
+    categories = await _categoriesProvider.getAll();
+    refresh();
   }
 
 }
