@@ -5,6 +5,7 @@ import 'package:app_delivery_udemy/src/pages/login/login_page.dart';
 import 'package:app_delivery_udemy/src/pages/register/register_page.dart';
 import 'package:app_delivery_udemy/src/pages/restaurant/categories/create/restaurant_categories_create_page.dart';
 import 'package:app_delivery_udemy/src/pages/restaurant/orders/list/restaurant_orders_list_page.dart';
+import 'package:app_delivery_udemy/src/pages/restaurant/products/create/restaurant_products_create_page.dart';
 import 'package:app_delivery_udemy/src/pages/roles/roles_page.dart';
 import 'package:app_delivery_udemy/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class _MyAppState extends State<MyApp> {
         'client/update' : (BuildContext context) => ClientUpdatePage(),
         'restaurant/orders/list' : (BuildContext context) => RestaurantOrdersListPage(),
         'restaurant/categories/create' : (BuildContext context) => RestaurantCategoriesCreatePage(),
+        'restaurant/products/create' : (BuildContext context) => RestaurantProductsCreatePage(),
         'delivery/orders/list' : (BuildContext context) => DeliveryOrdersListPage(),
       },
       theme: ThemeData(
