@@ -1,4 +1,6 @@
+import 'package:app_delivery_udemy/src/models/category.dart';
 import 'package:app_delivery_udemy/src/models/user.dart';
+import 'package:app_delivery_udemy/src/provider/categories_provider.dart';
 import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +13,15 @@ class ClientProductListController {
 
   User user;
 
+  List<Category> categories = [];
+  CategoriesProvider _categoriesProvider = new CategoriesProvider();
+
   Future init(BuildContext context, Function refresh) async{
     this.context = context;
     this.refresh = refresh;
     user = User.fromJson(await _sharedPref.read('user'));
+    _categoriesProvider.init(context, user);
+    getCategories();
     refresh();
   }
 
@@ -32,6 +39,11 @@ class ClientProductListController {
 
   void goToUpdatePage() {
     Navigator.pushNamed(context, 'client/update');
+  }
+
+  void getCategories() async {
+    categories = await _categoriesProvider.getAll();
+    refresh();
   }
 
 }
