@@ -2,6 +2,7 @@ import 'package:app_delivery_udemy/src/models/category.dart';
 import 'package:app_delivery_udemy/src/models/product.dart';
 import 'package:app_delivery_udemy/src/pages/client/products/list/client_products_list_controller.dart';
 import 'package:app_delivery_udemy/src/utils/my_colors.dart';
+import 'package:app_delivery_udemy/src/widgets/no_data_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -67,17 +68,29 @@ class _ClientProductsListPageState extends State<ClientProductsListPage> {
             return FutureBuilder(
                 future: _con.getProducts(category.id),
                 builder: (context, AsyncSnapshot<List<Product>> snapshot) {
-                  return GridView.builder(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.7
-                      ),
-                      itemCount: snapshot.data?.length ?? 0,
-                      itemBuilder: (_, index) {
-                        return _cardProduct(snapshot.data[index]);
-                      }
-                  );
+
+                  if(snapshot.hasData) {
+
+                    if(snapshot.data.length > 0) {
+                      return GridView.builder(
+                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 0.7
+                          ),
+                          itemCount: snapshot.data?.length ?? 0,
+                          itemBuilder: (_, index) {
+                            return _cardProduct(snapshot.data[index]);
+                          }
+                      );
+                    }
+                    else {
+                      return NoDataWidget(text: 'No hay productos');
+                    }
+                  }
+                  else {
+                    return NoDataWidget(text: 'No hay productos');
+                  }
                 }
             );
           }).toList(),
