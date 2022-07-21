@@ -1,10 +1,12 @@
 import 'package:app_delivery_udemy/src/models/category.dart';
 import 'package:app_delivery_udemy/src/models/product.dart';
 import 'package:app_delivery_udemy/src/models/user.dart';
+import 'package:app_delivery_udemy/src/pages/client/products/detail/client_products_detail_page.dart';
 import 'package:app_delivery_udemy/src/provider/categories_provider.dart';
 import 'package:app_delivery_udemy/src/provider/products_provider.dart';
 import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ClientProductListController {
 
@@ -52,6 +54,13 @@ class ClientProductListController {
   void getCategories() async {
     categories = await _categoriesProvider.getAll();
     refresh();
+  }
+
+  void openButtomSheat() {
+    showMaterialModalBottomSheet(
+        context: context,
+        builder: (context) => ClientProductsDetailPage()
+    );
   }
 
 }
