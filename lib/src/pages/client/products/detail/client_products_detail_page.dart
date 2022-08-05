@@ -199,7 +199,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
               image: _con.product?.image1 != null
                   ? NetworkImage(_con.product.image1)
                   : ('assets/img/pizza2.png'),
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
               fadeInDuration: Duration(milliseconds: 50),
               placeholder: AssetImage('assets/img/no-image.png'),
             ),
@@ -207,7 +207,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
               image: _con.product?.image2 != null
                   ? NetworkImage(_con.product.image2)
                   : ('assets/img/pizza2.png'),
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
               fadeInDuration: Duration(milliseconds: 50),
               placeholder: AssetImage('assets/img/no-image.png'),
             ),
@@ -215,7 +215,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
               image: _con.product?.image3 != null
                   ? NetworkImage(_con.product.image3)
                   : ('assets/img/pizza2.png'),
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
               fadeInDuration: Duration(milliseconds: 50),
               placeholder: AssetImage('assets/img/no-image.png'),
             ),

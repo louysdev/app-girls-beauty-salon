@@ -63,4 +63,8 @@ class ClientProductListController {
     );
   }
 
+  void goToOrderCreatePage() {
+    Navigator.pushNamed(context, 'client/orders/create');
+  }
+
 }
