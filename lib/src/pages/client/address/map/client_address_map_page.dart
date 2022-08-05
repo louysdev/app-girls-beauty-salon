@@ -61,7 +61,7 @@ class _ClientAddressMapPageState extends State<ClientAddressMapPage> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Text(
-            'Calle falsa con Carrera falsa',
+            _con.addressName ?? '',
             style: TextStyle(
               color: Colors.white,
               fontSize: 14,
@@ -108,6 +108,12 @@ class _ClientAddressMapPageState extends State<ClientAddressMapPage> {
       onMapCreated: _con.onMapCreated,
       myLocationButtonEnabled: false,
       myLocationEnabled: false,
+      onCameraMove: (position) {
+        _con.initialPosition = position;
+      },
+      onCameraIdle: () async {
+        await _con.setLocationDraggableInfo();
+      },
     );
   }
   void refresh() {
