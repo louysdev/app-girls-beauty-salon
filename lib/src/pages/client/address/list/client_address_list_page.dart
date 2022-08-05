@@ -40,7 +40,7 @@ class _ClientAddressListPageState extends State<ClientAddressListPage> {
             _textSelectAddress(),
             Container(
                 margin: EdgeInsets.only(top: 30),
-                child: NoDataWidget(text: 'Agrega una nueva direccion')
+                child: NoDataWidget(text: 'No tienes ninguna direccion, agrega una nueva')
             ),
             _buttonNewAddress(),
           ],
@@ -84,7 +84,7 @@ class _ClientAddressListPageState extends State<ClientAddressListPage> {
     return Container(
         height: 40,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: _con.goToNewAddress,
           child: Text(
               'Nueva direccion'
           ),
