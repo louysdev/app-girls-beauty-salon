@@ -229,7 +229,7 @@ class _ClientProductsDetailPageState extends State<ClientProductsDetailPage> {
           top: 5,
           left: 10,
             child: IconButton(
-              onPressed: () {},
+              onPressed: _con.close,
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: MyColors.primaryColor,

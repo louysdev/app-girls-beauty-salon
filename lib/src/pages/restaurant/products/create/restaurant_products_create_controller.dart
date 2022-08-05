@@ -121,6 +121,7 @@ class RestaurantProductsCreateController {
 
       if(numberFile == 1) {
         imageFile1 = File(pickedFile.path);
+        print('Imagen: $imageFile1');
       }
       else if(numberFile == 2) {
         imageFile2 = File(pickedFile.path);
