@@ -43,6 +43,8 @@ class _ClientAddressMapPageState extends State<ClientAddressMapPage> {
       mapType: MapType.normal,
       initialCameraPosition: _con.initialPosition,
       onMapCreated: _con.onMapCreated,
+      myLocationButtonEnabled: true,
+      myLocationEnabled: true,
     );
   }
   void refresh() {
