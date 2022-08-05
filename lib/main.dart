@@ -1,3 +1,5 @@
+import 'package:app_delivery_udemy/src/pages/client/address/create/client_address_create_page.dart';
+import 'package:app_delivery_udemy/src/pages/client/address/list/client_address_list_page.dart';
 import 'package:app_delivery_udemy/src/pages/client/orders/create/client_orders_create_page.dart';
 import 'package:app_delivery_udemy/src/pages/client/products/list/client_products_list_page.dart';
 import 'package:app_delivery_udemy/src/pages/client/update/client_update_page.dart';
@@ -36,6 +38,8 @@ class _MyAppState extends State<MyApp> {
         'client/products/list' : (BuildContext context) => ClientProductsListPage(),
         'client/update' : (BuildContext context) => ClientUpdatePage(),
         'client/orders/create' : (BuildContext context) => ClientOrdersCreatePage(),
+        'client/address/create' : (BuildContext context) => ClientAddressCreatePage(),
+        'client/address/list' : (BuildContext context) => ClientAddressListPage(),
         'restaurant/orders/list' : (BuildContext context) => RestaurantOrdersListPage(),
         'restaurant/categories/create' : (BuildContext context) => RestaurantCategoriesCreatePage(),
         'restaurant/products/create' : (BuildContext context) => RestaurantProductsCreatePage(),

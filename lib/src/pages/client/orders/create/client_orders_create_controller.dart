@@ -57,7 +57,9 @@ class ClientOrdersCreateController {
     _sharedPref.save('order', selectedProducts);
     getTotal();
   }
-
-
+  
+  void goToAddress() {
+    Navigator.pushNamed(context, 'client/address/list');
+  }
 
 }
