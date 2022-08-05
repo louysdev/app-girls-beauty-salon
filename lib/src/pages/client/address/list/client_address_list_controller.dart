@@ -31,9 +31,6 @@ class ClientAddressListController {
   void handleRadioValueChange(int value) async {
     radioValue = value;
     _sharedPref.save('address', address[value]);
-
-    Address a = Address.fromJson(await _sharedPref.read('address') ?? {});
-    print('SE GUARDO LA DIRECCION: ${a.toJson()}');
     
     refresh();
     print('Valor seleccionado: ${radioValue}');
@@ -51,6 +48,15 @@ class ClientAddressListController {
 
   Future<List<Address>> getAddress() async {
     address = await _addressProvider.getByUser(user.id);
+
+    Address a = Address.fromJson(await _sharedPref.read('address') ?? {});
+    int index = address.indexWhere((ad) => ad.id == a.id);
+
+    if (index != -1) {
+      radioValue = index;
+    }
+    print('SE GUARDO LA DIRECCION: ${a.toJson()}');
+
     return address;
   }
 
