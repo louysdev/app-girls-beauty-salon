@@ -7,18 +7,26 @@ class ClientAddressCreateController {
   BuildContext context;
   Function refresh;
 
+  TextEditingController refPointController = new TextEditingController();
+  Map<String, dynamic> refPoint;
+
   Future init(BuildContext context, Function refresh) {
     this.context = context;
     this.refresh = refresh;
   }
 
-  void openMap() {
-    showMaterialModalBottomSheet(
+  void openMap() async {
+    refPoint = await showMaterialModalBottomSheet(
       context: context,
       builder: (context) => ClientAddressMapPage(),
       isDismissible: false,
       enableDrag: false
     );
+
+    if (refPoint != null) {
+      refPointController.text = refPoint['address'];
+      refresh();
+    }
   }
 
 }
