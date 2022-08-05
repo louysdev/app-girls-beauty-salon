@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:app_delivery_udemy/src/provider/address_provider.dart';
+
 Address addressFromJson(String str) => Address.fromJson(json.decode(str));
 
 String addressToJson(Address data) => json.encode(data.toJson());
@@ -20,6 +22,7 @@ class Address {
   String neighborhood;
   double lat;
   double lng;
+  List<Address> toList = [];
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
     id: json["id"] is int ? json['id'].toString() : json['id'],
@@ -30,6 +33,13 @@ class Address {
     lng: json["lng"] is String ? double.parse(json["lng"]) : json["lng"],
   );
 
+  Address.fromJsonList(List<dynamic> jsonList) {
+    if(jsonList == null) return;
+    jsonList.forEach((item) {
+      Address address = Address.fromJson(item);
+      toList.add(address);
+    });
+  }
   Map<String, dynamic> toJson() => {
     "id": id,
     "id_user": idUser,
