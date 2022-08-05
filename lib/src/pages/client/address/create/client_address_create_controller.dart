@@ -54,7 +54,7 @@ class ClientAddressCreateController {
 
     if (responseApi.success) {
       Fluttertoast.showToast(msg: responseApi.message);
-      Navigator.pop(context);
+      Navigator.pop(context, true);
     }
   }
 
