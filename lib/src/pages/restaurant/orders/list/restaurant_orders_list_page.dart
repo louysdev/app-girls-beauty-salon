@@ -26,14 +26,68 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _con.key,
-      appBar: AppBar(
-        leading: _menuDrawer(),
-      ),
-      drawer: _drawer(),
-      body: Center(
-        child: Text('Restaurant orders list'),
+    return DefaultTabController(
+      length: _con.categories?.length,
+      child: Scaffold(
+          key: _con.key,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(100),
+            child: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.white,
+              flexibleSpace: Column(
+                children: [
+                  SizedBox(height: 40),
+                  _menuDrawer(),
+                ],
+              ),
+              bottom: TabBar(
+                indicatorColor: MyColors.primaryColor,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey[400],
+                isScrollable: true,
+                tabs: List<Widget>.generate(_con.categories.length, (index) {
+                  return Tab(
+                    child: Text(_con.categories[index] ?? ''),
+                  );
+                }),
+              ),
+            ),
+          ),
+          drawer: _drawer(),
+          body: TabBarView(
+            children: _con.categories.map((String category) {
+              return Container();
+              // return FutureBuilder(
+              //     future: _con.getProducts(category.id),
+              //     builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+              //
+              //       if(snapshot.hasData) {
+              //
+              //         if(snapshot.data.length > 0) {
+              //           return GridView.builder(
+              //               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              //               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //                   crossAxisCount: 2,
+              //                   childAspectRatio: 0.7
+              //               ),
+              //               itemCount: snapshot.data?.length ?? 0,
+              //               itemBuilder: (_, index) {
+              //                 return _cardProduct(snapshot.data[index]);
+              //               }
+              //           );
+              //         }
+              //         else {
+              //           return NoDataWidget(text: 'No hay productos');
+              //         }
+              //       }
+              //       else {
+              //         return NoDataWidget(text: 'No hay productos');
+              //       }
+              //     }
+              // );
+            }).toList(),
+          )
       ),
     );
   }
