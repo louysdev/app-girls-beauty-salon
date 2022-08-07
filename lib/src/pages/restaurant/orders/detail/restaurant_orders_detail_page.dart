@@ -148,7 +148,7 @@ class _RestaurantOrdersDetailPageState extends State<RestaurantOrdersDetailPage>
     return Container(
       margin: EdgeInsets.only(left: 30, right: 30, top: 5, bottom: 20),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: _con.updateOrder,
         style: ElevatedButton.styleFrom(
             primary: MyColors.primaryColor,
             padding: EdgeInsets.symmetric(vertical: 5),

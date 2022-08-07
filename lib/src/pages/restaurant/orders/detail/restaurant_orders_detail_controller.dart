@@ -1,9 +1,13 @@
 import 'package:app_delivery_udemy/src/models/order.dart';
 import 'package:app_delivery_udemy/src/models/product.dart';
+import 'package:app_delivery_udemy/src/models/response_api.dart';
 import 'package:app_delivery_udemy/src/models/user.dart';
+import 'package:app_delivery_udemy/src/provider/orders_provider.dart';
 import 'package:app_delivery_udemy/src/provider/users_provider.dart';
+import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
 import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RestaurantOrdersDetailController {
 
@@ -23,6 +27,7 @@ class RestaurantOrdersDetailController {
   User user;
   List<User> users = [];
   UsersProvider _usersProvider = new UsersProvider();
+  OrdersProvider _ordersProvider = new OrdersProvider();
   String idDelivery;
 
   Future init(BuildContext context, Function refresh, Order order) async {
@@ -31,6 +36,7 @@ class RestaurantOrdersDetailController {
     this.order = order;
     user = User.fromJson(await _sharedPref.read('user'));
     _usersProvider.init(context, sessionUser: user);
+    _ordersProvider.init(context, user);
     getTotal();
     getUsers();
     refresh();
@@ -47,6 +53,17 @@ class RestaurantOrdersDetailController {
       total = total + (product.price * product.quantity);
     });
     refresh();
+  }
+
+  void updateOrder() async {
+    if (idDelivery != null) {
+      order.idDelivery = idDelivery;
+      ResponseApi responseApi = await _ordersProvider.updateToDispatched(order);
+      MySnackbar.show(context, responseApi.message);
+    }
+    else {
+      Fluttertoast.showToast(msg: 'Selecciona el repartidor');
+    }
   }
 
 }
