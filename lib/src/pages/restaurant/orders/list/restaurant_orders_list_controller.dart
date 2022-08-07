@@ -1,8 +1,10 @@
 import 'package:app_delivery_udemy/src/models/order.dart';
 import 'package:app_delivery_udemy/src/models/user.dart';
+import 'package:app_delivery_udemy/src/pages/restaurant/orders/detail/restaurant_orders_detail_page.dart';
 import 'package:app_delivery_udemy/src/provider/orders_provider.dart';
 import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class RestaurantOrdersListController {
 
@@ -46,6 +48,13 @@ class RestaurantOrdersListController {
 
   void goToProductCreate() {
     Navigator.pushNamed(context, 'restaurant/products/create');
+  }
+
+  void opeButtomSheet(Order order) {
+    showMaterialModalBottomSheet(
+        context: context,
+        builder: (context) => RestaurantOrdersDetailPage(order: order)
+    );
   }
 
 }
