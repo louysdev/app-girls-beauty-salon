@@ -1,6 +1,10 @@
 import 'package:app_delivery_udemy/src/models/address.dart';
+import 'package:app_delivery_udemy/src/models/order.dart';
+import 'package:app_delivery_udemy/src/models/product.dart';
+import 'package:app_delivery_udemy/src/models/response_api.dart';
 import 'package:app_delivery_udemy/src/models/user.dart';
 import 'package:app_delivery_udemy/src/provider/address_provider.dart';
+import 'package:app_delivery_udemy/src/provider/orders_provider.dart';
 import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 
@@ -18,12 +22,14 @@ class ClientAddressListController {
 
   bool isCreated;
 
+  OrdersProvider _ordersProvider = new OrdersProvider();
+
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
     user = User.fromJson(await _sharedPref.read('user'));
-    
     _addressProvider.init(context, user);
+    _ordersProvider.init(context, user);
 
     refresh();
   }
@@ -45,6 +51,22 @@ class ClientAddressListController {
       }
     }
   }
+
+  void createOrder() async {
+    Address a = Address.fromJson(await _sharedPref.read('address') ?? {});
+    List<Product> selectedProducts = Product.fromJsonList(await _sharedPref.read('order')).toList;
+
+    Order order = new Order(
+        idClient: user.id,
+        idAddress: a.id,
+        products: selectedProducts
+    );
+    ResponseApi responseApi = await _ordersProvider.create(order);
+
+    print('Respuesta orden: ${responseApi.message}');
+
+  }
+
 
   Future<List<Address>> getAddress() async {
     address = await _addressProvider.getByUser(user.id);
