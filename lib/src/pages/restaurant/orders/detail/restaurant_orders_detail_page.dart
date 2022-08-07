@@ -3,6 +3,7 @@ import 'package:app_delivery_udemy/src/models/product.dart';
 import 'package:app_delivery_udemy/src/models/user.dart';
 import 'package:app_delivery_udemy/src/pages/restaurant/orders/detail/restaurant_orders_detail_controller.dart';
 import 'package:app_delivery_udemy/src/utils/my_colors.dart';
+import 'package:app_delivery_udemy/src/utils/relative_time_util.dart';
 import 'package:app_delivery_udemy/src/widgets/no_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -62,7 +63,10 @@ class _RestaurantOrdersDetailPageState extends State<RestaurantOrdersDetailPage>
               _dropDown([]),
               _textData('Cliente:', '${_con.order.client?.name ?? ''} ${_con.order.client?.lastname ?? ''}'),
               _textData('Entregar en:', '${_con.order.address?.address ?? ''}'),
-              _textData('Fecha de pedido:', '${_con.order.timestamp ?? ''}'),
+              _textData(
+                  'Fecha de pedido:',
+                  '${RelativeTimeUtil.getRelativeTime(_con.order.timestamp ?? 0)}'
+              ),
               //_textTotalPrice(),
               _buttonNext()
             ],
@@ -130,36 +134,11 @@ class _RestaurantOrdersDetailPageState extends State<RestaurantOrdersDetailPage>
               Text(
                 'Cantidad: ${product.quantity} ',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold
+                    fontSize: 13
                 ),
               ),
             ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _textTotalPrice() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-              'Total:',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 22
-              ),
-          ),
-          Text(
-            '${_con.total}\$',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20
-            ),
-          )
         ],
       ),
     );
@@ -214,9 +193,9 @@ class _RestaurantOrdersDetailPageState extends State<RestaurantOrdersDetailPage>
 
   Widget _imageProduct(Product product) {
     return Container(
-      width: 90,
-      height: 90,
-      padding: EdgeInsets.all(10),
+      width: 50,
+      height: 50,
+      padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20)),
           color: Colors.grey[200]
