@@ -17,6 +17,7 @@ class User {
   String sessionToken;
   String image;
   List<Rol> roles = [];
+  List<User> toList = [];
 
   User({
     this.id,
@@ -41,6 +42,14 @@ class User {
     image: json["image"],
     roles: json["roles"] == null ? [] : List<Rol>.from(json['roles'].map((model) => Rol.fromJson(model))) ?? [],
   );
+
+  User.fromJsonList(List<dynamic> jsonList) {
+    if(jsonList == null) return;
+    jsonList.forEach((item) {
+      User user = User.fromJson(item);
+      toList.add(user);
+    });
+  }
 
   Map<String, dynamic> toJson() => {
     "id": id,

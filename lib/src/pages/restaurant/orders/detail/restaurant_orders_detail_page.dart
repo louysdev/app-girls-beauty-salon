@@ -60,7 +60,7 @@ class _RestaurantOrdersDetailPageState extends State<RestaurantOrdersDetailPage>
                 indent: 30, // Izquierda
               ),
               _textDescription(),
-              _dropDown([]),
+              _dropDown(_con.users),
               _textData('Cliente:', '${_con.order.client?.name ?? ''} ${_con.order.client?.lastname ?? ''}'),
               _textData('Entregar en:', '${_con.order.address?.address ?? ''}'),
               _textData(
@@ -242,11 +242,11 @@ class _RestaurantOrdersDetailPageState extends State<RestaurantOrdersDetailPage>
                       ),
                     ),
                     items: _dropDownItems(users),
-                    //value: _con.idCategory,
+                    value: _con.idDelivery,
                     onChanged: (option) {
                       setState(() {
                         print('Repartidor seleccionado: $option');
-                        //_con.idCategory = option; // ESTABLECIENDO A LA VARIABLE AL ID CATEGORY
+                        _con.idDelivery = option; // ESTABLECIENDO A LA VARIABLE AL ID CATEGORY
                       });
                     },
                   )
@@ -263,7 +263,24 @@ class _RestaurantOrdersDetailPageState extends State<RestaurantOrdersDetailPage>
     List<DropdownMenuItem<String>> list = [];
     users.forEach((user) {
       list.add(DropdownMenuItem(
-        child: Text(user.name),
+        child: Row(
+          children: [
+            Container(
+              height: 40,
+              width: 40,
+              child: FadeInImage(
+                image: user.image != null
+                    ? NetworkImage(user.image)
+                    : ('assets/img/no-image.png'),
+                fit: BoxFit.cover,
+                fadeInDuration: Duration(milliseconds: 50),
+                placeholder: AssetImage('assets/img/no-image.png'),
+              ),
+            ),
+            SizedBox(width: 5),
+            Text(user.name)
+          ],
+        ),
         value: user.id,
       ));
     });
