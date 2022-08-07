@@ -1,3 +1,4 @@
+import 'package:app_delivery_udemy/src/models/order.dart';
 import 'package:app_delivery_udemy/src/pages/restaurant/orders/list/restaurant_orders_list_controller.dart';
 import 'package:app_delivery_udemy/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
           drawer: _drawer(),
           body: TabBarView(
             children: _con.categories.map((String category) {
-              return Container();
+              return _cardOrder(null);
               // return FutureBuilder(
               //     future: _con.getProducts(category.id),
               //     builder: (context, AsyncSnapshot<List<Product>> snapshot) {
@@ -88,6 +89,90 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
               // );
             }).toList(),
           )
+      ),
+    );
+  }
+
+  Widget _cardOrder(Order order) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      height: 160,
+      child: Card(
+        elevation: 3.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15)
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+                child: Container(
+                  height: 30,
+                  width: MediaQuery.of(context).size.width * 1,
+                  decoration: BoxDecoration(
+                    color: MyColors.primaryColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15)
+                    )
+                  ),
+                  child: Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Orden #0',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                        fontFamily: 'NimbusSans'
+                      ),
+                    ),
+                  ),
+                )
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 40, left: 20, right: 20),
+              child: Column(
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                    width: double.infinity,
+                    child: Text(
+                      'Pedido: 1232-123-123123',
+                      style: TextStyle(
+                          fontSize: 13
+                      ),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                    width: double.infinity,
+                    child: Text(
+                      'Cliente: Un culo',
+                      style: TextStyle(
+                          fontSize: 13
+                      ),
+                      maxLines: 1,
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.symmetric(vertical: 5),
+                    width: double.infinity,
+                    child: Text(
+                      'Entregar en: El culo del mundo',
+                      style: TextStyle(
+                          fontSize: 13
+                      ),
+                      maxLines: 2,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
