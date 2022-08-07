@@ -59,7 +59,8 @@ class RestaurantOrdersDetailController {
     if (idDelivery != null) {
       order.idDelivery = idDelivery;
       ResponseApi responseApi = await _ordersProvider.updateToDispatched(order);
-      MySnackbar.show(context, responseApi.message);
+      Fluttertoast.showToast(msg: responseApi.message, toastLength: Toast.LENGTH_LONG);
+      Navigator.pop(context, true);
     }
     else {
       Fluttertoast.showToast(msg: 'Selecciona el repartidor');

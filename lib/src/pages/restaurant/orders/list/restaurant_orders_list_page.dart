@@ -119,7 +119,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                       width: double.infinity,
                       alignment: Alignment.center,
                       child: Text(
-                        'Orden ${order.id}',
+                        'Orden #${order.id}',
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.white,
