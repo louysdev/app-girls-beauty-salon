@@ -1,6 +1,7 @@
 import 'package:app_delivery_udemy/src/models/order.dart';
 import 'package:app_delivery_udemy/src/pages/restaurant/orders/list/restaurant_orders_list_controller.dart';
 import 'package:app_delivery_udemy/src/utils/my_colors.dart';
+import 'package:app_delivery_udemy/src/widgets/no_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -28,7 +29,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: _con.categories?.length,
+      length: _con.status?.length,
       child: Scaffold(
           key: _con.key,
           appBar: PreferredSize(
@@ -47,9 +48,9 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                 labelColor: Colors.black,
                 unselectedLabelColor: Colors.grey[400],
                 isScrollable: true,
-                tabs: List<Widget>.generate(_con.categories.length, (index) {
+                tabs: List<Widget>.generate(_con.status.length, (index) {
                   return Tab(
-                    child: Text(_con.categories[index] ?? ''),
+                    child: Text(_con.status[index] ?? ''),
                   );
                 }),
               ),
@@ -57,36 +58,31 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
           ),
           drawer: _drawer(),
           body: TabBarView(
-            children: _con.categories.map((String category) {
-              return _cardOrder(null);
-              // return FutureBuilder(
-              //     future: _con.getProducts(category.id),
-              //     builder: (context, AsyncSnapshot<List<Product>> snapshot) {
-              //
-              //       if(snapshot.hasData) {
-              //
-              //         if(snapshot.data.length > 0) {
-              //           return GridView.builder(
-              //               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              //               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //                   crossAxisCount: 2,
-              //                   childAspectRatio: 0.7
-              //               ),
-              //               itemCount: snapshot.data?.length ?? 0,
-              //               itemBuilder: (_, index) {
-              //                 return _cardProduct(snapshot.data[index]);
-              //               }
-              //           );
-              //         }
-              //         else {
-              //           return NoDataWidget(text: 'No hay productos');
-              //         }
-              //       }
-              //       else {
-              //         return NoDataWidget(text: 'No hay productos');
-              //       }
-              //     }
-              // );
+            children: _con.status.map((String status) {
+              return FutureBuilder(
+                  future: _con.getOrders(status),
+                  builder: (context, AsyncSnapshot<List<Order>> snapshot) {
+
+                    if(snapshot.hasData) {
+
+                      if(snapshot.data.length > 0) {
+                        return ListView.builder(
+                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                            itemCount: snapshot.data?.length ?? 0,
+                            itemBuilder: (_, index) {
+                              return _cardOrder(snapshot.data[index]);
+                            }
+                        );
+                      }
+                      else {
+                        return NoDataWidget(text: 'No hay ordenes');
+                      }
+                    }
+                    else {
+                      return NoDataWidget(text: 'No hay ordenes');
+                    }
+                  }
+              );
             }).toList(),
           )
       ),
@@ -96,7 +92,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
   Widget _cardOrder(Order order) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      height: 160,
+      height: 155,
       child: Card(
         elevation: 3.0,
         shape: RoundedRectangleBorder(
@@ -119,7 +115,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                     width: double.infinity,
                     alignment: Alignment.center,
                     child: Text(
-                      'Orden #0',
+                      'Orden ${order.id}',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.white,
@@ -149,7 +145,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                     margin: EdgeInsets.symmetric(vertical: 5),
                     width: double.infinity,
                     child: Text(
-                      'Cliente: Un culo',
+                      'Cliente: ${order.client?.name ?? ''} ${order.client?.lastname ?? ''}',
                       style: TextStyle(
                           fontSize: 13
                       ),
@@ -161,7 +157,7 @@ class _RestaurantOrdersListPageState extends State<RestaurantOrdersListPage> {
                     margin: EdgeInsets.symmetric(vertical: 5),
                     width: double.infinity,
                     child: Text(
-                      'Entregar en: El culo del mundo',
+                      'Entregar en: ${order.address?.address ?? ''}',
                       style: TextStyle(
                           fontSize: 13
                       ),
