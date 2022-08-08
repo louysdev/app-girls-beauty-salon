@@ -13,6 +13,7 @@ class DeliveryOrdersMapController {
   BuildContext context;
   Function refresh;
   Position _position;
+  StreamSubscription _positionStream;
 
   String addressName;
   LatLng addressLatLng;
@@ -127,6 +128,27 @@ class DeliveryOrdersMapController {
           homeMarker
       );
 
+      _positionStream = Geolocator.getPositionStream(
+          desiredAccuracy: LocationAccuracy.high,
+          distanceFilter: 1
+      ).listen((Position position) {
+
+        _position = position;
+        
+        addMarker(
+            'delivery',
+            _position.latitude,
+            _position.longitude,
+            'Tu posicion',
+            '',
+            deliveryMarker
+        );
+        
+        animateCamaraToPosition(_position.latitude, _position.longitude);
+
+        refresh();
+      });
+
     } catch(e) {
       print('Error $e');
     }
@@ -186,6 +208,10 @@ class DeliveryOrdersMapController {
   
   void call() {
     launch("tel://${order.client.phone}");
+  }
+
+  void dispose() {
+    _positionStream?.cancel();
   }
 
 }

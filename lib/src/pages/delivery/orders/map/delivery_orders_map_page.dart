@@ -25,6 +25,13 @@ class _DeliveryOrdersMapPageState extends State<DeliveryOrdersMapPage> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _con.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -219,6 +226,7 @@ class _DeliveryOrdersMapPageState extends State<DeliveryOrdersMapPage> {
     );
   }
   void refresh() {
+    if(!mounted) return;
     setState(() {});
   }
 }
