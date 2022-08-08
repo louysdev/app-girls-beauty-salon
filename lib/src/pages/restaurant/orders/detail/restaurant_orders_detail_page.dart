@@ -71,7 +71,7 @@ class _RestaurantOrdersDetailPageState extends State<RestaurantOrdersDetailPage>
                   '${RelativeTimeUtil.getRelativeTime(_con.order.timestamp ?? 0)}'
               ),
               //_textTotalPrice(),
-              _buttonNext()
+              _con.order.status == 'PAGADO' ? _buttonNext() : Container()
             ],
           ),
         ),
