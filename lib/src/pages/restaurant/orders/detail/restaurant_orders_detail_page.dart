@@ -59,8 +59,11 @@ class _RestaurantOrdersDetailPageState extends State<RestaurantOrdersDetailPage>
                 endIndent: 30, // Derecha
                 indent: 30, // Izquierda
               ),
+              SizedBox(height: 10),
               _textDescription(),
-              _dropDown(_con.users),
+              SizedBox(height: 15),
+              _con.order.status!= 'PAGADO' ? _deliveryData() : Container(),
+              _con.order.status == 'PAGADO' ? _dropDown(_con.users) : Container(),
               _textData('Cliente:', '${_con.order.client?.name ?? ''} ${_con.order.client?.lastname ?? ''}'),
               _textData('Entregar en:', '${_con.order.address?.address ?? ''}'),
               _textData(
@@ -91,7 +94,7 @@ class _RestaurantOrdersDetailPageState extends State<RestaurantOrdersDetailPage>
      alignment: Alignment.centerLeft,
      margin: EdgeInsets.symmetric(horizontal: 30),
      child: Text(
-        'Asignar repartidor',
+       _con.order == 'PAGADO' ? 'Asignar repartidor' : 'Repartidor asignado',
        style: TextStyle(
          fontStyle: FontStyle.italic,
          color: MyColors.primaryColor,
@@ -254,6 +257,30 @@ class _RestaurantOrdersDetailPageState extends State<RestaurantOrdersDetailPage>
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _deliveryData() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        children: [
+          Container(
+            height: 40,
+            width: 40,
+            child: FadeInImage(
+              image: _con.order.delivery?.image != null
+                  ? NetworkImage(_con.order.delivery?.image)
+                  : ('assets/img/no-image.png'),
+              fit: BoxFit.cover,
+              fadeInDuration: Duration(milliseconds: 50),
+              placeholder: AssetImage('assets/img/no-image.png'),
+            ),
+          ),
+          SizedBox(width: 5),
+          Text('${_con.order.delivery?.name ?? ''} ${_con.order.delivery?.lastname ?? ''}')
+        ],
       ),
     );
   }
