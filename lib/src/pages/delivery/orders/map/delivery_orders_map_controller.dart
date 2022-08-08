@@ -1,7 +1,13 @@
 import 'dart:async';
 
 import 'package:app_delivery_udemy/src/models/order.dart';
+import 'package:app_delivery_udemy/src/models/response_api.dart';
+import 'package:app_delivery_udemy/src/models/user.dart';
+import 'package:app_delivery_udemy/src/provider/orders_provider.dart';
+import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
+import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -30,7 +36,12 @@ class DeliveryOrdersMapController {
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
   Order order;
+  OrdersProvider _ordersProvider = new OrdersProvider();
+  User user;
+  SharedPref _sharedPref = new SharedPref();
 
+  double _distanceBetween;
+  
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
@@ -38,6 +49,8 @@ class DeliveryOrdersMapController {
     deliveryMarker = await createMarkerFromAssets('assets/img/delivery2.png');
     homeMarker = await createMarkerFromAssets('assets/img/home.png');
 
+    user = User.fromJson(await _sharedPref.read('user'));
+    _ordersProvider.init(context, user);
     print('ORDEN: ${order.toJson()}');
     checkGPS();
   }
@@ -145,6 +158,7 @@ class DeliveryOrdersMapController {
         );
         
         animateCamaraToPosition(_position.latitude, _position.longitude);
+        isCloseToDeliveryPosition();
 
         refresh();
       });
@@ -212,6 +226,30 @@ class DeliveryOrdersMapController {
 
   void dispose() {
     _positionStream?.cancel();
+  }
+
+  void updateToDelivered() async {
+    if(_distanceBetween <= 200) {
+      ResponseApi responseApi = await _ordersProvider.updateToDelivered(order);
+      if(responseApi.success) {
+        Fluttertoast.showToast(msg: responseApi.message, toastLength: Toast.LENGTH_LONG);
+        Navigator.pushNamedAndRemoveUntil(context, 'delivery/orders/list', (route) => false);
+      }
+    }
+    else {
+      MySnackbar.show(context, 'Debe estar mas cerca a la posicion de entrega');
+    }
+  }
+
+  void isCloseToDeliveryPosition() {
+    _distanceBetween = Geolocator.distanceBetween(
+        _position.latitude,
+        _position.longitude,
+        order.address.lat,
+        order.address.lng
+    );
+
+    print('Distancia: ${_distanceBetween}');
   }
 
 }

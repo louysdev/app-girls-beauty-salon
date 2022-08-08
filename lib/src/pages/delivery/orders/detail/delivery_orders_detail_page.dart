@@ -67,7 +67,7 @@ class _DeliveryOrdersDetailPageState extends State<DeliveryOrdersDetailPage> {
                   '${RelativeTimeUtil.getRelativeTime(_con.order?.timestamp ?? 0)}'
               ),
               //_textTotalPrice(),
-              _buttonNext()
+              _con.order.status != 'ENTREGADO' ? _buttonNext() : Container()
             ],
           ),
         ),
@@ -134,7 +134,7 @@ class _DeliveryOrdersDetailPageState extends State<DeliveryOrdersDetailPage> {
       child: ElevatedButton(
         onPressed: _con.updateOrder,
         style: ElevatedButton.styleFrom(
-            primary: Colors.blue,
+            primary: _con.order?.status == 'DESPACHADO' ? Colors.blue : Colors.green,
             padding: EdgeInsets.symmetric(vertical: 5),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12)
@@ -148,7 +148,7 @@ class _DeliveryOrdersDetailPageState extends State<DeliveryOrdersDetailPage> {
                 height: 40,
                 alignment: Alignment.center,
                 child: Text(
-                  'INICIAR ENTREGA',
+                  _con.order?.status == 'DESPACHADO' ? 'INICIAR ENTREGA' : 'IR AL MAPA',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold
