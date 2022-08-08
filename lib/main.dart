@@ -5,6 +5,7 @@ import 'package:app_delivery_udemy/src/pages/client/orders/create/client_orders_
 import 'package:app_delivery_udemy/src/pages/client/products/list/client_products_list_page.dart';
 import 'package:app_delivery_udemy/src/pages/client/update/client_update_page.dart';
 import 'package:app_delivery_udemy/src/pages/delivery/orders/list/delivery_orders_list_page.dart';
+import 'package:app_delivery_udemy/src/pages/delivery/orders/map/delivery_orders_map_page.dart';
 import 'package:app_delivery_udemy/src/pages/login/login_page.dart';
 import 'package:app_delivery_udemy/src/pages/register/register_page.dart';
 import 'package:app_delivery_udemy/src/pages/restaurant/categories/create/restaurant_categories_create_page.dart';
@@ -46,6 +47,7 @@ class _MyAppState extends State<MyApp> {
         'restaurant/categories/create' : (BuildContext context) => RestaurantCategoriesCreatePage(),
         'restaurant/products/create' : (BuildContext context) => RestaurantProductsCreatePage(),
         'delivery/orders/list' : (BuildContext context) => DeliveryOrdersListPage(),
+        'delivery/orders/map' : (BuildContext context) => DeliveryOrdersMapPage(),
       },
       theme: ThemeData(
         primaryColor: MyColors.primaryColor,
