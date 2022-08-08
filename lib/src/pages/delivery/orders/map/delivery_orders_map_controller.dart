@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_delivery_udemy/src/models/order.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -23,12 +24,19 @@ class DeliveryOrdersMapController {
   Completer<GoogleMapController> _mapController = Completer();
 
   BitmapDescriptor deliveryMarker;
+  BitmapDescriptor homeMarker;
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+
+  Order order;
 
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
+    order = Order.fromJson(ModalRoute.of(context).settings.arguments as Map<String, dynamic>);
     deliveryMarker = await createMarkerFromAssets('assets/img/delivery2.png');
+    homeMarker = await createMarkerFromAssets('assets/img/home.png');
+
+    print('ORDEN: ${order.toJson()}');
     checkGPS();
   }
 
@@ -107,6 +115,15 @@ class DeliveryOrdersMapController {
           'Tu posicion',
           '',
           deliveryMarker
+      );
+
+      addMarker(
+          'home',
+          order.address.lat,
+          order.address.lng,
+          'Lugar de entrega',
+          '',
+          homeMarker
       );
 
     } catch(e) {
