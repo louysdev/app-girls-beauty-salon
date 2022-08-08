@@ -142,7 +142,7 @@ class _ClientOrdersListPageState extends State<ClientOrdersListPage> {
                       margin: EdgeInsets.symmetric(vertical: 5),
                       width: double.infinity,
                       child: Text(
-                        'Cliente: ${order.client?.name ?? ''} ${order.client?.lastname ?? ''}',
+                        'Repartidor: ${order.delivery?.name ?? 'No asignado'} ${order.delivery?.lastname ?? ''}',
                         style: TextStyle(
                             fontSize: 13
                         ),

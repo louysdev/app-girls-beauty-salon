@@ -37,7 +37,7 @@ class _ClientOrdersMapPageState extends State<ClientOrdersMapPage> {
       body: Stack(
         children: [
           Container(
-              height: MediaQuery.of(context).size.height * 0.6,
+              height: MediaQuery.of(context).size.height * 0.67,
               child: _googleMaps()
           ),
           SafeArea(
@@ -49,71 +49,14 @@ class _ClientOrdersMapPageState extends State<ClientOrdersMapPage> {
               ],
             ),
           ),
-          Positioned(
-            top: 40,
-              left: 15,
-              child: _iconGoogleMaps()
-          ),
-          Positioned(
-              top: 80,
-              left: 15,
-              child: _iconWaze()
-          )
         ],
-      ),
-    );
-  }
-
-  Widget _buttonNext() {
-    return Container(
-      margin: EdgeInsets.only(left: 30, right: 30, top: 5, bottom: 5),
-      child: ElevatedButton(
-        onPressed: _con.updateToDelivered,
-        style: ElevatedButton.styleFrom(
-            primary: MyColors.primaryColor,
-            padding: EdgeInsets.symmetric(vertical: 5),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12)
-            )
-        ),
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                height: 40,
-                alignment: Alignment.center,
-                child: Text(
-                  'ENTREGAR PRODUCTO',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                  margin: EdgeInsets.only(left: 45, top: 4),
-                  height: 30,
-                  child: Icon(
-                    Icons.check_circle,
-                    color: Colors.white,
-                    size: 30,
-                  )
-              ),
-            )
-
-          ],
-        ),
       ),
     );
   }
 
   Widget _cardOrderInfo() {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height * 0.33,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -135,8 +78,7 @@ class _ClientOrdersMapPageState extends State<ClientOrdersMapPage> {
             _listTitleAddress(_con.order?.address?.neighborhood, 'Barrio', Icons.my_location),
             _listTitleAddress(_con.order?.address?.address, 'Direccion', Icons.location_on),
             Divider(color: Colors.grey[400], endIndent: 30, indent: 30),
-            _clientInfo(),
-            _buttonNext()
+            _clientInfo()
           ],
       ),
     );
@@ -151,8 +93,8 @@ class _ClientOrdersMapPageState extends State<ClientOrdersMapPage> {
             height: 50,
             width: 50,
             child: FadeInImage(
-              image: _con.order?.client?.image != null
-                  ? NetworkImage(_con.order?.client?.image)
+              image: _con.order?.delivery?.image != null
+                  ? NetworkImage(_con.order?.delivery?.image)
                   : ('assets/img/no-image.png'),
               fit: BoxFit.cover,
               fadeInDuration: Duration(milliseconds: 50),
@@ -162,7 +104,7 @@ class _ClientOrdersMapPageState extends State<ClientOrdersMapPage> {
           Container(
             margin: EdgeInsets.only(left: 10),
             child: Text(
-              '${_con.order.client?.name ?? ''} ${_con.order.client?.lastname ?? ''}',
+              '${_con.order?.delivery?.name ?? ''} ${_con.order?.delivery?.lastname ?? ''}',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 16
@@ -221,28 +163,6 @@ class _ClientOrdersMapPageState extends State<ClientOrdersMapPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _iconGoogleMaps() {
-    return GestureDetector(
-      onTap: _con.launchGoogleMaps,
-      child: Image.asset(
-        'assets/img/google_maps.png',
-        height: 35,
-        width: 35,
-      ),
-    );
-  }
-
-  Widget _iconWaze() {
-    return GestureDetector(
-      onTap: _con.launchWaze,
-      child: Image.asset(
-        'assets/img/waze.png',
-        height: 35,
-        width: 35,
       ),
     );
   }
