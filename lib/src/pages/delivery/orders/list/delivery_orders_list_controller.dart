@@ -1,6 +1,6 @@
 import 'package:app_delivery_udemy/src/models/order.dart';
 import 'package:app_delivery_udemy/src/models/user.dart';
-import 'package:app_delivery_udemy/src/pages/restaurant/orders/detail/restaurant_orders_detail_page.dart';
+import 'package:app_delivery_udemy/src/pages/delivery/orders/detail/delivery_orders_detail_page.dart';
 import 'package:app_delivery_udemy/src/provider/orders_provider.dart';
 import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +55,7 @@ class DeliveryOrdersListController {
   void opeButtomSheet(Order order) async {
     isUpdated = await showMaterialModalBottomSheet(
         context: context,
-        builder: (context) => RestaurantOrdersDetailPage(order: order)
+        builder: (context) => DeliveryOrdersDetailPage(order: order)
     );
 
     if (isUpdated) {
