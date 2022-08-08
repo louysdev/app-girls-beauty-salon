@@ -60,11 +60,11 @@ class _DeliveryOrdersDetailPageState extends State<DeliveryOrdersDetailPage> {
                 indent: 30, // Izquierda
               ),
               SizedBox(height: 10),
-              _textData('Cliente:', '${_con.order.client?.name ?? ''} ${_con.order.client?.lastname ?? ''}'),
-              _textData('Entregar en:', '${_con.order.address?.address ?? ''}'),
+              _textData('Cliente:', '${_con.order?.client?.name ?? ''} ${_con.order?.client?.lastname ?? ''}'),
+              _textData('Entregar en:', '${_con.order?.address?.address ?? ''}'),
               _textData(
                   'Fecha de pedido:',
-                  '${RelativeTimeUtil.getRelativeTime(_con.order.timestamp ?? 0)}'
+                  '${RelativeTimeUtil.getRelativeTime(_con.order?.timestamp ?? 0)}'
               ),
               //_textTotalPrice(),
               _buttonNext()
@@ -74,9 +74,9 @@ class _DeliveryOrdersDetailPageState extends State<DeliveryOrdersDetailPage> {
       ),
       body:  _con.order.products.length > 0
           ? ListView(
-        children: _con.order.products.map((Product product) {
+        children: _con.order.products?.map((Product product) {
           return _cardProduct(product);
-        }).toList(),
+        })?.toList(),
       )
       : Container(
           width: double.infinity,

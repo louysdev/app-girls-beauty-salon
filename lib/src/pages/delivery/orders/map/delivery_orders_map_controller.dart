@@ -6,6 +6,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart' as location;
+import 'package:url_launcher/url_launcher.dart';
 
 class DeliveryOrdersMapController {
 
@@ -181,6 +182,10 @@ class DeliveryOrdersMapController {
     }
 
     return await Geolocator.getCurrentPosition();
+  }
+  
+  void call() {
+    launch("tel://${order.client.phone}");
   }
 
 }

@@ -115,8 +115,8 @@ class _DeliveryOrdersMapPageState extends State<DeliveryOrdersMapPage> {
       ),
       child: Column(
           children: [
-            _listTitleAddress(_con.order.address?.neighborhood, 'Barrio', Icons.my_location),
-            _listTitleAddress(_con.order.address?.address, 'Direccion', Icons.location_on),
+            _listTitleAddress(_con.order?.address?.neighborhood, 'Barrio', Icons.my_location),
+            _listTitleAddress(_con.order?.address?.address, 'Direccion', Icons.location_on),
             Divider(color: Colors.grey[400], endIndent: 30, indent: 30),
             _clientInfo(),
             _buttonNext()
@@ -134,8 +134,8 @@ class _DeliveryOrdersMapPageState extends State<DeliveryOrdersMapPage> {
             height: 50,
             width: 50,
             child: FadeInImage(
-              image: _con.order.client?.image != null
-                  ? NetworkImage(_con.order.client?.image)
+              image: _con.order?.client?.image != null
+                  ? NetworkImage(_con.order?.client?.image)
                   : ('assets/img/no-image.png'),
               fit: BoxFit.cover,
               fadeInDuration: Duration(milliseconds: 50),
@@ -160,7 +160,7 @@ class _DeliveryOrdersMapPageState extends State<DeliveryOrdersMapPage> {
               color: Colors.grey[200]
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: _con.call,
               icon: Icon(Icons.phone, color: Colors.black),
             ),
           )
