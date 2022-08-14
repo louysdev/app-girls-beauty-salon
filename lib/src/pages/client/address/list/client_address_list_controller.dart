@@ -3,10 +3,13 @@ import 'package:app_delivery_udemy/src/models/order.dart';
 import 'package:app_delivery_udemy/src/models/product.dart';
 import 'package:app_delivery_udemy/src/models/response_api.dart';
 import 'package:app_delivery_udemy/src/models/user.dart';
+import 'package:app_delivery_udemy/src/provider/StripeProvider.dart';
 import 'package:app_delivery_udemy/src/provider/address_provider.dart';
 import 'package:app_delivery_udemy/src/provider/orders_provider.dart';
+import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
 import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 
 class ClientAddressListController {
 
@@ -23,13 +26,18 @@ class ClientAddressListController {
   bool isCreated;
 
   OrdersProvider _ordersProvider = new OrdersProvider();
+  StripeProvider _stripeProvider = new StripeProvider();
+  
+  ProgressDialog progressDialog;
 
   Future init(BuildContext context, Function refresh) async {
     this.context = context;
     this.refresh = refresh;
+    progressDialog = new ProgressDialog(context: context);
     user = User.fromJson(await _sharedPref.read('user'));
     _addressProvider.init(context, user);
     _ordersProvider.init(context, user);
+    _stripeProvider.init(context);
 
     refresh();
   }
@@ -53,22 +61,26 @@ class ClientAddressListController {
   }
 
   void createOrder() async {
-    Address a = Address.fromJson(await _sharedPref.read('address') ?? {});
-    List<Product> selectedProducts = Product.fromJsonList(await _sharedPref.read('order')).toList;
 
-    Order order = new Order(
-        idClient: user.id,
-        idAddress: a.id,
-        products: selectedProducts
-    );
-    ResponseApi responseApi = await _ordersProvider.create(order);
+    progressDialog.show(max: 100, msg: 'Espere un momento');
+    var response = await _stripeProvider.payWithCard('${150 * 100}', 'USD');
+    progressDialog.close();
 
-    Navigator.pushNamed(context, 'client/payments/create');
-    
-    print('Respuesta orden: ${responseApi.message}');
+    MySnackbar.show(context, response.message);
 
+    if (response.succes) {
+      Address a = Address.fromJson(await _sharedPref.read('address') ?? {});
+      List<Product> selectedProducts = Product.fromJsonList(await _sharedPref.read('order')).toList;
+      Order order = new Order(
+          idClient: user.id,
+          idAddress: a.id,
+          products: selectedProducts
+      );
+      ResponseApi responseApi = await _ordersProvider.create(order);
+
+      print('Respuesta orden: ${responseApi.message}');
+    }
   }
-
 
   Future<List<Address>> getAddress() async {
     address = await _addressProvider.getByUser(user.id);
