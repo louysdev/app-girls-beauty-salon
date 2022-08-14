@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_delivery_udemy/src/models/category.dart';
 import 'package:app_delivery_udemy/src/models/product.dart';
 import 'package:app_delivery_udemy/src/models/user.dart';
@@ -21,6 +23,9 @@ class ClientProductListController {
   CategoriesProvider _categoriesProvider = new CategoriesProvider();
   ProductsProvider _productsProvider = new ProductsProvider();
 
+  Timer searchOnStoppedTyping;
+  String productName = '';
+
   Future init(BuildContext context, Function refresh) async{
     this.context = context;
     this.refresh = refresh;
@@ -31,8 +36,30 @@ class ClientProductListController {
     refresh();
   }
 
-  Future<List<Product>> getProducts(String idCategory) async {
-    return await _productsProvider.getByCategory(idCategory);
+  void onChangeText(String text) {
+    Duration duration = Duration(milliseconds: 800);
+
+    if (searchOnStoppedTyping != null) {
+      searchOnStoppedTyping.cancel();
+      refresh();
+    }
+
+    searchOnStoppedTyping = new Timer(duration, () {
+      productName = text;
+
+      refresh();
+      print('TEXTO COMPLETO: $productName');
+    });
+  }
+
+  Future<List<Product>> getProducts(String idCategory, String productName) async {
+
+    if (productName.isEmpty) {
+      return await _productsProvider.getByCategory(idCategory);
+    }
+    else {
+      return await _productsProvider.getByCategoryAndProductName(idCategory, productName);
+    }
   }
 
   void logout() {
