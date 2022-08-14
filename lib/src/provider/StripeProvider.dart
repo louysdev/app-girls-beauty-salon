@@ -38,7 +38,8 @@ class StripeProvider {
       if (response.status == 'succeeded') {
         return new StripeTransactionResponse(
           message: 'Transaccion exitosa',
-          succes: true
+          succes: true,
+          paymentMethod: paymentMethod
         );
       }
       else {

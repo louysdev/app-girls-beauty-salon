@@ -78,6 +78,18 @@ class ClientAddressListController {
       );
       ResponseApi responseApi = await _ordersProvider.create(order);
 
+      if (responseApi.success) {
+        Navigator.pushNamedAndRemoveUntil(
+            context,
+            'client/payments/status',
+            (route) => false,
+            arguments: {
+              'brand': response.paymentMethod.card.brand,
+              'last4': response.paymentMethod.card.last4
+            }
+        );
+      }
+
       print('Respuesta orden: ${responseApi.message}');
     }
   }
