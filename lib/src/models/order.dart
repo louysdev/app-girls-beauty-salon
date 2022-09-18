@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:app_delivery_udemy/src/models/address.dart';
-import 'package:app_delivery_udemy/src/models/product.dart';
-import 'package:app_delivery_udemy/src/models/user.dart';
+import 'package:app_girls_beauty_salon/src/models/address.dart';
+import 'package:app_girls_beauty_salon/src/models/product.dart';
+import 'package:app_girls_beauty_salon/src/models/user.dart';
 
 Order orderFromJson(String str) => Order.fromJson(json.decode(str));
 

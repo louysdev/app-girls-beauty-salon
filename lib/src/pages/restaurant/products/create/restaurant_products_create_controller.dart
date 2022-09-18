@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:app_delivery_udemy/src/models/category.dart';
-import 'package:app_delivery_udemy/src/models/product.dart';
-import 'package:app_delivery_udemy/src/models/response_api.dart';
-import 'package:app_delivery_udemy/src/models/user.dart';
-import 'package:app_delivery_udemy/src/provider/categories_provider.dart';
-import 'package:app_delivery_udemy/src/provider/products_provider.dart';
-import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
-import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
+import 'package:app_girls_beauty_salon/src/models/category.dart';
+import 'package:app_girls_beauty_salon/src/models/product.dart';
+import 'package:app_girls_beauty_salon/src/models/response_api.dart';
+import 'package:app_girls_beauty_salon/src/models/user.dart';
+import 'package:app_girls_beauty_salon/src/provider/categories_provider.dart';
+import 'package:app_girls_beauty_salon/src/provider/products_provider.dart';
+import 'package:app_girls_beauty_salon/src/utils/my_snackbar.dart';
+import 'package:app_girls_beauty_salon/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:image_picker/image_picker.dart';

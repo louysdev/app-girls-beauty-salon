@@ -1,7 +1,7 @@
-import 'package:app_delivery_udemy/src/models/address.dart';
-import 'package:app_delivery_udemy/src/pages/client/address/list/client_address_list_controller.dart';
-import 'package:app_delivery_udemy/src/utils/my_colors.dart';
-import 'package:app_delivery_udemy/src/widgets/no_data_widget.dart';
+import 'package:app_girls_beauty_salon/src/models/address.dart';
+import 'package:app_girls_beauty_salon/src/pages/client/address/list/client_address_list_controller.dart';
+import 'package:app_girls_beauty_salon/src/utils/my_colors.dart';
+import 'package:app_girls_beauty_salon/src/widgets/no_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 

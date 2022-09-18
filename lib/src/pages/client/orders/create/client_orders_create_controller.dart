@@ -1,5 +1,5 @@
-import 'package:app_delivery_udemy/src/models/product.dart';
-import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
+import 'package:app_girls_beauty_salon/src/models/product.dart';
+import 'package:app_girls_beauty_salon/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 class ClientOrdersCreateController {

@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:app_delivery_udemy/src/models/order.dart';
-import 'package:app_delivery_udemy/src/models/response_api.dart';
-import 'package:app_delivery_udemy/src/models/user.dart';
-import 'package:app_delivery_udemy/src/provider/orders_provider.dart';
-import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
-import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
+import 'package:app_girls_beauty_salon/src/models/order.dart';
+import 'package:app_girls_beauty_salon/src/models/response_api.dart';
+import 'package:app_girls_beauty_salon/src/models/user.dart';
+import 'package:app_girls_beauty_salon/src/provider/orders_provider.dart';
+import 'package:app_girls_beauty_salon/src/utils/my_snackbar.dart';
+import 'package:app_girls_beauty_salon/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';

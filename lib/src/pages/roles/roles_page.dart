@@ -1,5 +1,5 @@
-import 'package:app_delivery_udemy/src/models/rol.dart';
-import 'package:app_delivery_udemy/src/pages/roles/roles_controller.dart';
+import 'package:app_girls_beauty_salon/src/models/rol.dart';
+import 'package:app_girls_beauty_salon/src/pages/roles/roles_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 

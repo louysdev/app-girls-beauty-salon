@@ -1,5 +1,5 @@
-import 'package:app_delivery_udemy/src/pages/login/login_controller.dart';
-import 'package:app_delivery_udemy/src/utils/my_colors.dart';
+import 'package:app_girls_beauty_salon/src/pages/login/login_controller.dart';
+import 'package:app_girls_beauty_salon/src/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
@@ -201,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
         bottom: MediaQuery.of(context).size.height * 0.17
       ),
       child: Lottie.asset(
-          'assets/json/delivery.json',
+          'assets/json/women.json',
           width: 350,
           height: 200,
           fit: BoxFit.fill

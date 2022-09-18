@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.juanito.app_delivery_udemy">
+    package="com.juanito.app_girls_beauty_salon">
     
     <uses-permission android:name="android.permission.INTERNET"/>
     
@@ -45,7 +45,7 @@
             android:value="2" />
 
        <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyD6H1_0UrUZ5yJ62f3-xVqrbPMuYUdNe1c"/>
+           android:value="AIzaSyBNn_W0azDFnc6D3PXokCMXTapmtQFnYAc"/>
 
     </application>
 </manifest>

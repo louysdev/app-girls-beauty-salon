@@ -1,8 +1,8 @@
-import 'package:app_delivery_udemy/src/models/response_api.dart';
-import 'package:app_delivery_udemy/src/models/user.dart';
-import 'package:app_delivery_udemy/src/provider/users_provider.dart';
-import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
-import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
+import 'package:app_girls_beauty_salon/src/models/response_api.dart';
+import 'package:app_girls_beauty_salon/src/models/user.dart';
+import 'package:app_girls_beauty_salon/src/provider/users_provider.dart';
+import 'package:app_girls_beauty_salon/src/utils/my_snackbar.dart';
+import 'package:app_girls_beauty_salon/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 
 class LoginController {

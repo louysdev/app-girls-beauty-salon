@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:app_delivery_udemy/src/provider/address_provider.dart';
+import 'package:app_girls_beauty_salon/src/provider/address_provider.dart';
 
 Address addressFromJson(String str) => Address.fromJson(json.decode(str));
 

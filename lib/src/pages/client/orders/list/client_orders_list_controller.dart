@@ -1,9 +1,9 @@
-import 'package:app_delivery_udemy/src/models/order.dart';
-import 'package:app_delivery_udemy/src/models/user.dart';
-import 'package:app_delivery_udemy/src/pages/client/orders/detail/client_orders_detail_page.dart';
-import 'package:app_delivery_udemy/src/pages/delivery/orders/detail/delivery_orders_detail_page.dart';
-import 'package:app_delivery_udemy/src/provider/orders_provider.dart';
-import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
+import 'package:app_girls_beauty_salon/src/models/order.dart';
+import 'package:app_girls_beauty_salon/src/models/user.dart';
+import 'package:app_girls_beauty_salon/src/pages/client/orders/detail/client_orders_detail_page.dart';
+import 'package:app_girls_beauty_salon/src/pages/delivery/orders/detail/delivery_orders_detail_page.dart';
+import 'package:app_girls_beauty_salon/src/provider/orders_provider.dart';
+import 'package:app_girls_beauty_salon/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 

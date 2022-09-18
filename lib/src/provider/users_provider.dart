@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:app_delivery_udemy/src/models/response_api.dart';
-import 'package:app_delivery_udemy/src/models/user.dart';
-import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
+import 'package:app_girls_beauty_salon/src/models/response_api.dart';
+import 'package:app_girls_beauty_salon/src/models/user.dart';
+import 'package:app_girls_beauty_salon/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
-import 'package:app_delivery_udemy/src/api/environment.dart';
+import 'package:app_girls_beauty_salon/src/api/environment.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';

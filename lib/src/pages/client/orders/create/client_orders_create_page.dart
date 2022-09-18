@@ -1,7 +1,7 @@
-import 'package:app_delivery_udemy/src/models/product.dart';
-import 'package:app_delivery_udemy/src/pages/client/orders/create/client_orders_create_controller.dart';
-import 'package:app_delivery_udemy/src/utils/my_colors.dart';
-import 'package:app_delivery_udemy/src/widgets/no_data_widget.dart';
+import 'package:app_girls_beauty_salon/src/models/product.dart';
+import 'package:app_girls_beauty_salon/src/pages/client/orders/create/client_orders_create_controller.dart';
+import 'package:app_girls_beauty_salon/src/utils/my_colors.dart';
+import 'package:app_girls_beauty_salon/src/widgets/no_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -68,10 +68,13 @@ class _ClientOrdersCreatePageState extends State<ClientOrdersCreatePage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                product?.name ?? '',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold
+              Container(
+                width: 180,
+                child: Text(
+                  product?.name ?? '',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),
                 ),
               ),
               SizedBox(height: 10),

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:app_delivery_udemy/src/models/stripe_transaction_response.dart';
-import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
+import 'package:app_girls_beauty_salon/src/models/stripe_transaction_response.dart';
+import 'package:app_girls_beauty_salon/src/utils/my_snackbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 import 'package:http/http.dart' as http;

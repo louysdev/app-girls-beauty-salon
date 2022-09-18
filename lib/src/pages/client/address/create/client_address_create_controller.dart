@@ -1,10 +1,10 @@
-import 'package:app_delivery_udemy/src/models/address.dart';
-import 'package:app_delivery_udemy/src/models/response_api.dart';
-import 'package:app_delivery_udemy/src/models/user.dart';
-import 'package:app_delivery_udemy/src/pages/client/address/map/client_address_map_page.dart';
-import 'package:app_delivery_udemy/src/provider/address_provider.dart';
-import 'package:app_delivery_udemy/src/utils/my_snackbar.dart';
-import 'package:app_delivery_udemy/src/utils/shared_pref.dart';
+import 'package:app_girls_beauty_salon/src/models/address.dart';
+import 'package:app_girls_beauty_salon/src/models/response_api.dart';
+import 'package:app_girls_beauty_salon/src/models/user.dart';
+import 'package:app_girls_beauty_salon/src/pages/client/address/map/client_address_map_page.dart';
+import 'package:app_girls_beauty_salon/src/provider/address_provider.dart';
+import 'package:app_girls_beauty_salon/src/utils/my_snackbar.dart';
+import 'package:app_girls_beauty_salon/src/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';

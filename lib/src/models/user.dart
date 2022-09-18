@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:app_delivery_udemy/src/models/rol.dart';
+import 'package:app_girls_beauty_salon/src/models/rol.dart';
 
 User userFromJson(String str) => User.fromJson(json.decode(str));
 

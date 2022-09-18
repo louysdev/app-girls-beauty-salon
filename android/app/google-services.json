@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "196366265324",
-    "project_id": "delivery-app-udemy-9d9e3",
-    "storage_bucket": "delivery-app-udemy-9d9e3.appspot.com"
+    "project_number": "399553086577",
+    "project_id": "app-girls-beauty-salon",
+    "storage_bucket": "app-girls-beauty-salon.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:196366265324:android:71e64d6f29edcb1612aec9",
+        "mobilesdk_app_id": "1:399553086577:android:2bae736fdc93052fd447d0",
         "android_client_info": {
-          "package_name": "com.juanito.app_delivery_udemy"
+          "package_name": "com.juanito.app_girls_beauty_salon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "196366265324-k9gs4r2idodhl4h7994p0foh7poet4qk.apps.googleusercontent.com",
+          "client_id": "399553086577-tti4l11tgb99uvs4tcjbffbv7f6cfqta.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.juanito.app_delivery_udemy",
-            "certificate_hash": "dd31877f0d39edb88f2d37fd862377efa72ecd4c"
+            "package_name": "com.juanito.app_girls_beauty_salon",
+            "certificate_hash": "3aa4adcd49310c0c4e635773a54045e292af9978"
           }
         },
         {
-          "client_id": "196366265324-6mhspiu7e1lg7g5bq8ddroo8nerllmn4.apps.googleusercontent.com",
+          "client_id": "399553086577-bba5ue5e8nadpq23ri9rt85pm8k5epch.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBdZ7hWojij-Izf0DljWKUaaLs4wF6JBBo"
+          "current_key": "AIzaSyAaoJ5uQiVqnOG4rz-fjrjWCXHYJ9wXSi0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "196366265324-6mhspiu7e1lg7g5bq8ddroo8nerllmn4.apps.googleusercontent.com",
+              "client_id": "399553086577-bba5ue5e8nadpq23ri9rt85pm8k5epch.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

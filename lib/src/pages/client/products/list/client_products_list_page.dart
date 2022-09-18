@@ -1,8 +1,8 @@
-import 'package:app_delivery_udemy/src/models/category.dart';
-import 'package:app_delivery_udemy/src/models/product.dart';
-import 'package:app_delivery_udemy/src/pages/client/products/list/client_products_list_controller.dart';
-import 'package:app_delivery_udemy/src/utils/my_colors.dart';
-import 'package:app_delivery_udemy/src/widgets/no_data_widget.dart';
+import 'package:app_girls_beauty_salon/src/models/category.dart';
+import 'package:app_girls_beauty_salon/src/models/product.dart';
+import 'package:app_girls_beauty_salon/src/pages/client/products/list/client_products_list_controller.dart';
+import 'package:app_girls_beauty_salon/src/utils/my_colors.dart';
+import 'package:app_girls_beauty_salon/src/widgets/no_data_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
